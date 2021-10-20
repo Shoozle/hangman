@@ -9,12 +9,14 @@ const wordsToGuess = [
 
 const buttonArea = document.querySelector('.letter__buttons');
 const wordArea = document.querySelector('.hangmanword');
+const hangmanLivesArea = document.querySelector('.hangmanlives');
 const letters = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase();
 let currentLives = 6;
-let wordToGuess = Math.floor(Math.random() * 6);
-let secretWord = [...wordsToGuess[wordToGuess]].map(letter => letter !== ' ' ? '_' : ' ').join('');
-let word = wordsToGuess[wordToGuess].toUpperCase();
+let wordToGuess;
+let secretWord;
+let word;
 
+hangmanLivesArea.textContent = currentLives;
 wordArea.textContent = secretWord;
 
 const displayLetters = () => {
@@ -41,13 +43,29 @@ const revealLetter = (letter) => {
     }
     secretWord = [...oldWord]
     wordArea.textContent = oldWord.join('')
+
+    setTimeout(() => {
+        if (!secretWord.includes('_')) {
+            alert('YOU WIN')
+        }
+    }, 250);
 }
 
 const addFail = () => {
-    console.log('you failed')
+    currentLives--;
+
+    if (currentLives == 0) {
+        setTimeout(() => {
+            alert('You died')
+            resetGame();
+        }, 250);
+    }
+
+    hangmanLivesArea.textContent = currentLives;
 }
 
 const checkLetter = (letter) => {
+    letter.setAttribute("disabled", "true")
     letter = letter.innerHTML;
     const wordArray = [...word]
     if (wordArray.includes(letter)) {
@@ -55,12 +73,14 @@ const checkLetter = (letter) => {
     } else {
         addFail();
     }
+    
 }
 
-const restGame = () => {
-    wordToGuess = Math.floor(Math.random() * 6);
+const resetGame = () => {
     newWordToGuess();
     currentLives = 6;
+    hangmanLivesArea.textContent = currentLives;
 }
 
+newWordToGuess();
 displayLetters();
