@@ -9,8 +9,6 @@ const wordsToGuess = [
     'Dyffryn Ardudwy'
 ]
 
-
-
 const buttonArea = document.querySelector('.letter__buttons');
 const wordArea = document.querySelector('.hangmanword');
 const hangmanLivesArea = document.querySelector('.hangmanlives');
@@ -60,7 +58,6 @@ const drawStage = (stage) => {
             ctx.beginPath();
             ctx.moveTo(122, 95);
             ctx.lineTo(140, 110);
-            ctx.fill();
             ctx.stroke();
             break; 
         }
@@ -68,7 +65,6 @@ const drawStage = (stage) => {
             ctx.beginPath();
             ctx.moveTo(122, 95);
             ctx.lineTo(102, 110);
-            ctx.fill();
             ctx.stroke();
             break; 
         }
@@ -129,7 +125,6 @@ const checkLetter = (letter) => {
     } else {
         addFail();
     }
-
 }
 
 const resetGame = () => {
