@@ -17,6 +17,7 @@ const hangmanLivesArea = document.querySelector('.hangmanlives');
 const canvas = document.querySelector('.hangmancanvas');
 const ctx = canvas.getContext('2d');
 ctx.strokePath = 'black';
+ctx.lineWidth = 5;
 const letters = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase();
 let currentLives = 8;
 let currentStage = -1;
@@ -57,7 +58,6 @@ const drawStage = (stage) => {
         }
         case 6: {
             ctx.beginPath();
-            ctx.lineWidth = 5;
             ctx.moveTo(122, 95);
             ctx.lineTo(140, 110);
             ctx.fill();
@@ -66,7 +66,6 @@ const drawStage = (stage) => {
         }
         case 7: {
             ctx.beginPath();
-            ctx.lineWidth = 5;
             ctx.moveTo(122, 95);
             ctx.lineTo(102, 110);
             ctx.fill();
@@ -135,7 +134,8 @@ const checkLetter = (letter) => {
 
 const resetGame = () => {
     newWordToGuess();
-    currentLives = 6;
+    currentLives = 8;
+    currentStage = -1;
     hangmanLivesArea.textContent = currentLives;
     buttonArea.querySelectorAll('*').forEach(n => n.remove());
     displayLetters();
