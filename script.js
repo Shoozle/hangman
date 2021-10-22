@@ -1,10 +1,10 @@
 const wordsToGuess = [
-    'Hidetaka Miyazaki',
-    'Shu Takumi',
-    'Hideki Kamiya',
-    'Hideaki Itsuno',
-    'Shinji Mikami',
-    'Tetsuya Takahashi'
+    'Aberystwyth',
+    'Merthyr Tydfil',
+    'Port Talbot Parkway',
+    'Rhoose Cardiff International Airport',
+    'Fishguard Harbour',
+    'Dyffryn Ardudwy'
 ]
 
 const buttonArea = document.querySelector('.letter__buttons');
@@ -80,6 +80,8 @@ const resetGame = () => {
     newWordToGuess();
     currentLives = 6;
     hangmanLivesArea.textContent = currentLives;
+    buttonArea.querySelectorAll('*').forEach(n => n.remove());
+    displayLetters();
 }
 
 newWordToGuess();
