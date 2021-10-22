@@ -11,7 +11,6 @@ const wordsToGuess = [
 
 const buttonArea = document.querySelector('.letter__buttons');
 const wordArea = document.querySelector('.hangmanword');
-const hangmanLivesArea = document.querySelector('.hangmanlives');
 const canvas = document.querySelector('.hangmancanvas');
 const ctx = canvas.getContext('2d');
 ctx.strokePath = 'black';
@@ -23,7 +22,6 @@ let wordToGuess;
 let secretWord;
 let word;
 
-hangmanLivesArea.textContent = currentLives;
 wordArea.textContent = secretWord;
 
 const drawStage = (stage) => {
@@ -113,7 +111,6 @@ const addFail = () => {
         }, 250);
     }
     drawStage(currentStage);   
-    hangmanLivesArea.textContent = currentLives;
 }
 
 const checkLetter = (letter) => {
@@ -131,7 +128,6 @@ const resetGame = () => {
     newWordToGuess();
     currentLives = 8;
     currentStage = -1;
-    hangmanLivesArea.textContent = currentLives;
     buttonArea.querySelectorAll('*').forEach(n => n.remove());
     displayLetters();
     ctx.clearRect(0, 0, canvas.width, canvas.height)
