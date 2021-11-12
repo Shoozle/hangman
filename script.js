@@ -80,7 +80,7 @@ const displayLetters = () => {
 
 const newWordToGuess = () => {
     if (wordsToGuess.length === 0) { 
-        alert('NO MORE WORDS TO GUESS! GO OUTSIDE!')
+        alert('NO MORE WORDS TO GUESS! GO OUTSIDE!');
     } else {
         wordToGuess = Math.floor(Math.random() * wordsToGuess.length);
         wordIndex = wordsToGuess.indexOf(wordsToGuess[wordToGuess]);
@@ -139,7 +139,10 @@ const resetGame = () => {
     currentLives = 8;
     currentStage = -1;
     buttonArea.querySelectorAll('*').forEach(n => n.remove());
-    displayLetters();
+    if (wordsToGuess.length > 0) { 
+        displayLetters();
+    }
+
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
 
