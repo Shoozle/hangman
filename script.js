@@ -1,6 +1,6 @@
 /** @type{HTMLCanvasElement}*/
 
-const wordsToGuess = [
+let wordsToGuess = [
     'Aberystwyth',
     'Merthyr Tydfil',
     'Port Talbot Parkway',
@@ -21,6 +21,7 @@ let currentStage = -1;
 let wordToGuess;
 let secretWord;
 let word;
+let wordIndex;
 
 wordArea.textContent = secretWord;
 
@@ -78,10 +79,16 @@ const displayLetters = () => {
 }
 
 const newWordToGuess = () => {
-    wordToGuess = Math.floor(Math.random() * 6);
-    word = wordsToGuess[wordToGuess].toUpperCase();
-    secretWord = [...word].map(letter => letter !== ' ' ? '_' : ' ').join('');
-    wordArea.innerHTML = secretWord;
+    if (wordsToGuess.length === 0) { 
+        alert('NO MORE WORDS TO GUESS! GO OUTSIDE!')
+    } else {
+        wordToGuess = Math.floor(Math.random() * wordsToGuess.length);
+        wordIndex = wordsToGuess.indexOf(wordsToGuess[wordToGuess]);
+        console.log({wordIndex, wordsToGuess});
+        word = wordsToGuess[wordToGuess].toUpperCase();
+        secretWord = [...word].map(letter => letter !== ' ' ? '_' : ' ').join('');
+        wordArea.innerHTML = secretWord;
+    }
 }
 
 const revealLetter = (letter) => {
@@ -96,7 +103,10 @@ const revealLetter = (letter) => {
 
     setTimeout(() => {
         if (!secretWord.includes('_')) {
-            alert('YOU WIN')
+            alert('YOU WIN');
+            const newArray = wordsToGuess.filter(wd => wd.toUpperCase() !== word);
+            wordsToGuess = [...newArray]
+            resetGame();
         }
     }, 250);
 }
